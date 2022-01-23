@@ -1,0 +1,7 @@
+{
+    "name": "i2c_device",
+    "version-string": "0.0.1",
+    "dependencies": [
+      "fmt"
+    ]
+}
