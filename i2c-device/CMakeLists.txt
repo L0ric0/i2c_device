@@ -1,9 +1,9 @@
 set(I2CDEVICE_HEADER 
-    "i2c_device/include/i2c_device/exception.hpp" 
-    "i2c_device/include/i2c_device/concept.hpp"
-    "i2c_device/include/i2c_device/device.hpp"
-    "i2c_device/include/i2c_device/bit.hpp"  
-    "i2c_device/include/i2c_device/util.hpp"
+    "i2c-device/include/i2c-device/exception.hpp" 
+    "i2c-device/include/i2c-device/concept.hpp"
+    "i2c-device/include/i2c-device/device.hpp"
+    "i2c-device/include/i2c-device/bit.hpp"  
+    "i2c-device/include/i2c-device/util.hpp"
 )
 
 add_library(i2c-device
@@ -11,12 +11,12 @@ add_library(i2c-device
 )
 
 if(WIN32)
-install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/include/i2c_device/driver/Windows.hpp"
-        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/i2c_device/driver"
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/include/i2c-device/driver/Windows.hpp"
+        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/i2c-device/driver"
 )
 elseif(LINUX)
-install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/include/i2c_device/driver/Linux.hpp"
-        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/i2c_device/driver"
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/include/i2c-device/driver/Linux.hpp"
+        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/i2c-device/driver"
 )
 endif()
 
