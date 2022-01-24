@@ -24,7 +24,12 @@ target_link_libraries(i2c_device PRIVATE project_options
 target_include_directories(i2c_device PUBLIC include)
 
 if(WIN32)
+message(STATUS ">>> WINDOWS")
 
 elseif(LINUX)
-target_link_libraries(i2c_device PUBLIC i2c)
+message(STATUS ">>> LINUX")
+
+find_package(fmt CONFIG REQUIRED)
+target_link_libraries(i2c_device PRIVATE fmt::fmt)
+target_link_libraries(i2c_device PRIVATE i2c)
 endif()
