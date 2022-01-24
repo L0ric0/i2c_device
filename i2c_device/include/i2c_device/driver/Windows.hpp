@@ -1,10 +1,10 @@
 #ifndef I2C_WINDOWS_HPP_
 #define I2C_WINDOWS_HPP_
 
-#include "i2c/concept.hpp"
-#include "i2c/util.hpp"
-#include "i2c/bit.hpp"
-#include "i2c/exception.hpp"
+#include "i2c_device/concept.hpp"
+#include "i2c_device/util.hpp"
+#include "i2c_device/bit.hpp"
+#include "i2c_device/exception.hpp"
 
 #include <winrt/windows.devices.i2c.h>
 #include <winrt/windows.devices.enumeration.h>

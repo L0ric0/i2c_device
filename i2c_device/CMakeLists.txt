@@ -1,27 +1,38 @@
+set(I2CDEVICE_HEADER 
+    "i2c_device/include/i2c_device/exception.hpp" 
+    "i2c_device/include/i2c_device/concept.hpp"
+    "i2c_device/include/i2c_device/device.hpp"
+    "i2c_device/include/i2c_device/bit.hpp"  
+    "i2c_device/include/i2c_device/util.hpp"
+)
+
 add_library(i2c_device
-    "include/i2c/exception.hpp" "src/exception.cpp"
-    "include/i2c/concept.hpp"
-    "include/i2c/device.hpp"
-    "include/i2c/bit.hpp"
-    "include/i2c/util.hpp"
+    "src/exception.cpp"
 )
 
 if(WIN32)
-target_sources(i2c_device
-    PUBLIC "include/i2c/driver/Windows.hpp"
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/include/i2c_device/driver/Windows.hpp"
+        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/i2c_device/driver"
 )
 elseif(LINUX)
-target_sources(i2c_device
-    PUBLIC "include/i2c/driver/Linux.hpp"
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/include/i2c_device/driver/Linux.hpp"
+        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/i2c_device/driver"
 )
 endif()
 
-add_library(i2c_device::i2c_device ALIAS i2c_device)
+set_target_properties(i2c_device PROPERTIES PUBLIC_HEADER
+    "${I2CDEVICE_HEADER}"
+)
+
+add_library(i2c::i2c_device ALIAS i2c_device)
 
 target_link_libraries(i2c_device PRIVATE project_options
                                          project_warnings)
 
-target_include_directories(i2c_device PUBLIC include)
+target_include_directories(i2c_device PUBLIC 
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>  
+    $<INSTALL_INTERFACE:include/>  # <prefix>/include
+)
 
 if(WIN32)
 message(STATUS ">>> WINDOWS")

@@ -1,4 +1,4 @@
-#include "i2c/exception.hpp"
+#include "i2c_device/exception.hpp"
 
 #include <system_error>
 #include <string>

@@ -1,9 +1,9 @@
 #ifndef I2C_LINUX_HPP_
 #define I2C_LINUX_HPP_
 
-#include "i2c/exception.hpp"
-#include "i2c/concept.hpp"
-#include "i2c/util.hpp"
+#include "i2c_device/exception.hpp"
+#include "i2c_device/concept.hpp"
+#include "i2c_device/util.hpp"
 
 #include <linux/i2c-dev.h>
 extern "C" {

@@ -1,15 +1,15 @@
 #ifndef I2C_DEVICE_HPP_
 #define I2C_DEVICE_HPP_
 
-#include "i2c/concept.hpp"
-#include "i2c/util.hpp"
+#include "i2c_device/concept.hpp"
+#include "i2c_device/util.hpp"
 
 #ifdef _WIN32
-#include "i2c/driver/Windows.hpp"
+#include "i2c_device/driver/Windows.hpp"
 
 using default_driver = i2c::driver::Windows<>;
 #elif __linux__
-#include "i2c/driver/Linux.hpp"
+#include "i2c_device/driver/Linux.hpp"
 
 using default_driver = i2c::driver::Linux<>;
 #endif

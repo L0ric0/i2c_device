@@ -1,7 +1,7 @@
 #ifndef I2C_BIT_HPP_
 #define I2C_BIT_HPP_
 
-#include "i2c/concept.hpp"
+#include "i2c_device/concept.hpp"
 
 #include <bit>
 #include <iterator>
