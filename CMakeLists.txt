@@ -17,8 +17,11 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 project(i2c_device VERSION 0.0.1)
 
-include(PreventInSourceBuilds)
+include(GNUInstallDirs)
+include(CheckIncludeFiles)
+include(CMakePackageConfigHelpers)
 
+include(PreventInSourceBuilds)
 include(StandardProjectSettings)
 
 add_library(project_options INTERFACE)
@@ -48,3 +51,35 @@ option(BUILD_SHARED_LIBS "Enable compilation of shared libraries" OFF)
 #endif()
 
 add_subdirectory(i2c_device)
+
+install(TARGETS i2c_device project_warnings project_options
+        EXPORT I2CDeviceTargets
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        FRAMEWORK DESTINATION ${CMAKE_INSTALL_PREFIX}
+        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/i2c_device
+)
+
+export(EXPORT I2CDeviceTargets NAMESPACE i2c:: FILE I2CDeviceTargets.cmake)
+
+set(CMAKE_INSTALL_CONFIGDIR ${CMAKE_INSTALL_LIBDIR}/cmake/i2c_device)
+
+install(EXPORT I2CDeviceTargets
+        DESTINATION ${CMAKE_INSTALL_CONFIGDIR}
+        NAMESPACE i2c::
+)
+
+configure_package_config_file(${PROJECT_SOURCE_DIR}/cmake/I2CDeviceConfig.cmake.in ${PROJECT_BINARY_DIR}/I2CDeviceConfig.cmake
+        INSTALL_DESTINATION ${CMAKE_INSTALL_CONFIGDIR}
+        PATH_VARS CMAKE_INSTALL_FULL_INCLUDEDIR
+)
+
+write_basic_package_version_file(${PROJECT_BINARY_DIR}/I2CDeviceConfigVersion.cmake
+        VERSION ${PROJECT_VERSION}
+        COMPATIBILITY SameMajorVersion
+)
+
+install(FILES ${PROJECT_BINARY_DIR}/I2CDeviceConfig.cmake ${PROJECT_BINARY_DIR}/I2CDeviceConfigVersion.cmake
+        DESTINATION ${CMAKE_INSTALL_CONFIGDIR}
+)
