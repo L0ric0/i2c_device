@@ -8,6 +8,11 @@ set(I2CDEVICE_HEADER
 
 add_library(i2c-device
     "src/exception.cpp"
+    "include/i2c-device/exception.hpp" 
+    "include/i2c-device/concept.hpp"
+    "include/i2c-device/device.hpp"
+    "include/i2c-device/bit.hpp"  
+    "include/i2c-device/util.hpp"
 )
 
 if(WIN32)
