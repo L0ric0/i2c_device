@@ -6,7 +6,7 @@ set(I2CDEVICE_HEADER
     "i2c_device/include/i2c_device/util.hpp"
 )
 
-add_library(i2c_device
+add_library(i2c-device
     "src/exception.cpp"
 )
 
@@ -20,16 +20,16 @@ install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/include/i2c_device/driver/Linux.hpp"
 )
 endif()
 
-set_target_properties(i2c_device PROPERTIES PUBLIC_HEADER
+set_target_properties(i2c-device PROPERTIES PUBLIC_HEADER
     "${I2CDEVICE_HEADER}"
 )
 
-add_library(i2c::i2c_device ALIAS i2c_device)
+add_library(i2c::i2c-device ALIAS i2c-device)
 
-target_link_libraries(i2c_device PRIVATE project_options
+target_link_libraries(i2c-device PRIVATE project_options
                                          project_warnings)
 
-target_include_directories(i2c_device PUBLIC 
+target_include_directories(i2c-device PUBLIC 
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>  
     $<INSTALL_INTERFACE:include/>  # <prefix>/include
 )
@@ -41,6 +41,6 @@ elseif(LINUX)
 message(STATUS ">>> LINUX")
 
 find_package(fmt CONFIG REQUIRED)
-target_link_libraries(i2c_device PRIVATE fmt::fmt)
-target_link_libraries(i2c_device PRIVATE i2c)
+target_link_libraries(i2c-device PRIVATE fmt::fmt)
+target_link_libraries(i2c-device PRIVATE i2c)
 endif()

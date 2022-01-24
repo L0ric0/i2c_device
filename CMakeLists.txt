@@ -15,7 +15,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-project(i2c_device VERSION 0.0.1)
+project(i2c-device VERSION 0.0.1)
 
 include(GNUInstallDirs)
 include(CheckIncludeFiles)
@@ -50,10 +50,10 @@ option(BUILD_SHARED_LIBS "Enable compilation of shared libraries" OFF)
 #    add_subdirectory(tests)
 #endif()
 
-add_subdirectory(i2c_device)
+add_subdirectory(i2c-device)
 
-install(TARGETS i2c_device project_warnings project_options
-        EXPORT I2CDeviceTargets
+install(TARGETS i2c-device project_warnings project_options
+        EXPORT i2c-device-targets
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -61,25 +61,25 @@ install(TARGETS i2c_device project_warnings project_options
         PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/i2c_device
 )
 
-export(EXPORT I2CDeviceTargets NAMESPACE i2c:: FILE I2CDeviceTargets.cmake)
+export(EXPORT i2c-device-targets NAMESPACE i2c:: FILE i2c-device-targets.cmake)
 
-set(CMAKE_INSTALL_CONFIGDIR ${CMAKE_INSTALL_LIBDIR}/cmake/i2c_device)
+set(CMAKE_INSTALL_CONFIGDIR ${CMAKE_INSTALL_LIBDIR}/cmake/i2c-device)
 
-install(EXPORT I2CDeviceTargets
+install(EXPORT i2c-device-targets
         DESTINATION ${CMAKE_INSTALL_CONFIGDIR}
         NAMESPACE i2c::
 )
 
-configure_package_config_file(${PROJECT_SOURCE_DIR}/cmake/I2CDeviceConfig.cmake.in ${PROJECT_BINARY_DIR}/I2CDeviceConfig.cmake
+configure_package_config_file(${PROJECT_SOURCE_DIR}/cmake/i2c-device-config.cmake.in ${PROJECT_BINARY_DIR}/i2c-device-config.cmake
         INSTALL_DESTINATION ${CMAKE_INSTALL_CONFIGDIR}
         PATH_VARS CMAKE_INSTALL_FULL_INCLUDEDIR
 )
 
-write_basic_package_version_file(${PROJECT_BINARY_DIR}/I2CDeviceConfigVersion.cmake
+write_basic_package_version_file(${PROJECT_BINARY_DIR}/i2c-device-config-version.cmake
         VERSION ${PROJECT_VERSION}
         COMPATIBILITY SameMajorVersion
 )
 
-install(FILES ${PROJECT_BINARY_DIR}/I2CDeviceConfig.cmake ${PROJECT_BINARY_DIR}/I2CDeviceConfigVersion.cmake
+install(FILES ${PROJECT_BINARY_DIR}/i2c-device-config.cmake ${PROJECT_BINARY_DIR}/i2c-device-config-version.cmake
         DESTINATION ${CMAKE_INSTALL_CONFIGDIR}
 )
