@@ -22,6 +22,7 @@ project(i2c-device VERSION 0.0.1)
 include(GNUInstallDirs)
 include(CheckIncludeFiles)
 include(CMakePackageConfigHelpers)
+include(GenerateExportHeader)
 
 include(PreventInSourceBuilds)
 include(StandardProjectSettings)

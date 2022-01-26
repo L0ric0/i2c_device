@@ -13,20 +13,26 @@ add_library(i2c-device
     "include/i2c-device/device.hpp"
     "include/i2c-device/bit.hpp"  
     "include/i2c-device/util.hpp"
+    "include/i2c-device/driver/Windows.hpp"
+    "include/i2c-device/driver/Linux.hpp"
+    "include/i2c-device/detail/i2c-device_export.h"
 )
 
-if(WIN32)
+
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/include/i2c-device/driver/Windows.hpp"
         DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/i2c-device/driver"
 )
-elseif(LINUX)
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/include/i2c-device/driver/Linux.hpp"
         DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/i2c-device/driver"
 )
-endif()
 
 set_target_properties(i2c-device PROPERTIES PUBLIC_HEADER
     "${I2CDEVICE_HEADER}"
+)
+
+generate_export_header(i2c-device)
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/i2c-device_export.h"
+        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/i2c-device/detail"
 )
 
 add_library(i2c::i2c-device ALIAS i2c-device)
