@@ -13,27 +13,24 @@ endif()
 
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
 project(i2c-device VERSION 0.0.1)
 
 include(GNUInstallDirs)
 include(CheckIncludeFiles)
 include(CMakePackageConfigHelpers)
-
+include(GenerateExportHeader)
 include(PreventInSourceBuilds)
 include(StandardProjectSettings)
+include(StaticAnalyzers)
+include(CompilerWarnings)
+include(Doxygen)
 
 add_library(project_options INTERFACE)
 target_compile_features(project_options INTERFACE cxx_std_20)
 
 add_library(project_warnings INTERFACE)
-include(CompilerWarnings)
 set_project_warnings(project_options)
 
-include(StaticAnalyzers)
-
-include(Doxygen)
 enable_doxygen()
 
 option(BUILD_SHARED_LIBS "Enable compilation of shared libraries" OFF)
@@ -57,8 +54,7 @@ install(TARGETS i2c-device project_warnings project_options
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        FRAMEWORK DESTINATION ${CMAKE_INSTALL_PREFIX}
-        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/i2c_device
+        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/i2c-device
 )
 
 export(EXPORT i2c-device-targets NAMESPACE i2c:: FILE i2c-device-targets.cmake)
