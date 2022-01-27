@@ -51,11 +51,11 @@ namespace i2c::driver
 
             switch (res.Status) {
             case I2cTransferStatus::ClockStretchTimeout:
-                throw exception::timeout {};
+                throw exception::timedout {};
             case I2cTransferStatus::SlaveAddressNotAcknowledged:
                 throw exception::no_device_or_address {};
             default:
-                throw exception::i2c_error { -1 };
+                throw exception::i2c_error { -1, std::system_category() };
             }
         }
 
