@@ -7,6 +7,11 @@
 #include <system_error>
 #include <string>
 
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4275)
+#endif
+
 namespace i2c::exception
 {
     // suppress C4275 (non dll-interface class 'std::system_error' used as base for dll-interface struct 'i2c::exception::i2c_error')
@@ -14,7 +19,6 @@ namespace i2c::exception
     // https://stackoverflow.com/questions/24511376/how-to-dllexport-a-class-derived-from-stdruntime-error
     // https://docs.microsoft.com/en-us/cpp/error-messages/compiler-warnings/compiler-warning-level-2-c4275?view=msvc-170
 	struct I2C_DEVICE_EXPORT i2c_error : std::system_error
-    #pragma warning(suppress : 4275)
     {
         i2c_error(std::error_code ec);
         i2c_error(std::error_code ec, const std::string& what_arg);
@@ -64,5 +68,9 @@ namespace i2c::exception
         timedout(int ev = ETIMEDOUT, const std::error_category& ecat = std::system_category());
     };
 }
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 #endif
