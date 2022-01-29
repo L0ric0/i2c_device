@@ -1,6 +1,6 @@
 {
     "name": "i2c-device",
-    "version-string": "0.0.1",
+    "version-string": "0.0.2",
     "description":  "i2c_device is a platform crosplatform i2c library.",
     "dependencies": [
       "fmt"
