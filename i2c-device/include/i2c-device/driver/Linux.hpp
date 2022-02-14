@@ -30,12 +30,12 @@ namespace i2c::driver
         using handle_type = int;
 
         handle_type open_i2c_device(const AdapterNumber adapter_nr, const DeviceID deviceid){
-            const auto filehandle = ::open(fmt::format("/dev/i2c-{}", adapter_nr).c_str(), O_RDWR);
+            const auto filehandle = ::open(fmt::format("/dev/i2c-{}", adapter_nr()).c_str(), O_RDWR);
             if (filehandle < 0) {
                 //FIXME function to handle open errors
             }
 
-            const auto res = ioctl(filehandle, I2C_SLAVE, deviceid);
+            const auto res = ioctl(filehandle, I2C_SLAVE, deviceid());
             handle_i2c_error(res);
 
             return filehandle;
