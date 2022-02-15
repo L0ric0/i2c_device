@@ -8,5 +8,7 @@ include(${CMAKE_CURRENT_LIST_DIR}/i2c-device-targets.cmake)
 set(I2C_DEVICE_LIBRARY i2c::i2c_device)
 set(I2C_DEVICE_LIBRARYS i2c::i2c_device)
 
+find_dependency(fmt CONFIG REQUIRED)
+
 check_required_components(i2c_device)
 set(I2C_DEVICE_FOUND 1)
