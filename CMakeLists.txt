@@ -13,7 +13,7 @@ endif()
 
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
-project(i2c-device VERSION 0.0.5)
+project(i2c-device VERSION 0.0.6)
 
 include(GNUInstallDirs)
 include(CheckIncludeFiles)
