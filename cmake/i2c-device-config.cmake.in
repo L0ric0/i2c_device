@@ -9,7 +9,7 @@ set(I2C_DEVICE_LIBRARY i2c::i2c_device)
 set(I2C_DEVICE_LIBRARYS i2c::i2c_device)
 
 if(UNIX AND NOT APPLE)
-	find_dependency(fmt CONFIG REQUIRED)
+	find_package(fmt CONFIG REQUIRED)
 endif()
 
 check_required_components(i2c_device)
