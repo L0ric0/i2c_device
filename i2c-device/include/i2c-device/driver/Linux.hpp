@@ -148,7 +148,7 @@ namespace i2c::driver
             const handle_type& handle,
             const std::uint8_t reg,
             contiguous_output_iterator<T> auto buffer_begin,
-            contiguouts_output_iterator<T> auto buffer_end)
+            contiguous_output_iterator<T> auto buffer_end)
         {
             i2c_smbus_read_i2c_block_data(handle, reg, buffer_begin, buffer_end);
         }
