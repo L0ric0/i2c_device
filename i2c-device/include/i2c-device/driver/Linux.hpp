@@ -1,20 +1,25 @@
 #ifndef I2C_LINUX_HPP_
 #define I2C_LINUX_HPP_
 
+#include "i2c-device/bit.hpp"
 #include "i2c-device/exception.hpp"
 #include "i2c-device/concept.hpp"
 #include "i2c-device/util.hpp"
 
+#include <fmt/format.h>
+
+#include <fcntl.h>
+#include <sys/ioctl.h>
 #include <linux/i2c-dev.h>
 extern "C" {
 #include <i2c/smbus.h>
 }
 #include <unistd.h>
 
-#include <bit>
-#include <iterator>
 #include <array>
+#include <bit>
 #include <cstdint>
+#include <iterator>
 #include <system_error>
 
 namespace i2c::driver
@@ -43,7 +48,7 @@ namespace i2c::driver
 
         void close_i2c_device(const handle_type& handle)
         {
-            ::fclose(handle);
+            ::close(handle);
         }
 
         void handle_i2c_error(const int ret_val) const
@@ -76,7 +81,7 @@ namespace i2c::driver
             case ETIMEDOUT:
                 throw exception::timedout {};
             default:
-                throw exception::i2c_error { std::system_category().default_error_condition(errno) };
+                throw exception::i2c_error { errno, std::system_category() };
             }
         }
 
